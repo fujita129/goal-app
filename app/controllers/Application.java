@@ -1,6 +1,9 @@
 package controllers;
 
-import play.*;
+import java.util.List;
+
+import models.DayTarget;
+import play.db.ebean.Model.Finder;
 import play.mvc.*;
 
 import views.html.*;
@@ -16,8 +19,10 @@ public class Application extends Controller {
     }
 
     public static Result home() {
+    	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
+    	List<DayTarget> dayTargets = dayFinder.all();
     	return ok(
-    			home.render()
+    			home.render(dayTargets)
     			);
     }
 }

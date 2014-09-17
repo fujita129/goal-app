@@ -1,5 +1,29 @@
+@(dayTargets: List[DayTarget])
+
 @import helper._
 
 @main {
-    <h2><font color="red">Welcome!!</font></h2>
+    <h2><font color="red">Today's Target</font></h2>
+    <tabel border="1">
+    	<thead>
+    		<tr>
+    			<td>Target</td>
+    		</tr>
+    	</thead>
+
+    	<tbody>
+    		@for(dayTarget <- dayTargets){
+   			<tr>
+   				<td>
+					@dayTarget.name
+                </td>
+			</tr>
+   			}
+   			<tr>
+   				<td>
+   					<a href="@routes.Application.home()">Create new target</a>
+   				</td>
+   			</tr>
+   		</tbody>
+    </tabel>
 }
