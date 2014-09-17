@@ -24,6 +24,6 @@ public class DayTarget extends Model {
     @Formats.DateTime(pattern="yyyy-MM-dd")
     public Date date;
 
-    public static Finder<Long,DayTarget> find = new Finder<Long,DayTarget>(Long.class, DayTarget.class);
+    public static Finder<Long,DayTarget> findDayTarget = new Finder<Long,DayTarget>(Long.class, DayTarget.class);
 
 }

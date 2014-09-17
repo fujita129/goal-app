@@ -6,11 +6,18 @@
 GET     /                           controllers.Application.index()
 
 # Home
-GET     /home                      controllers.Application.home()
+GET     /home                       controllers.Application.home()
 
 # Add DayTarget
-GET     /day/new                   controllers.Application.createDayTarget()
-POST    /day                       controllers.Application.saveDayTarget()
+GET     /createday/new              controllers.Application.createDayTarget()
+POST    /createday                  controllers.Application.saveDayTarget()
+
+# Edit existing DayTarget
+GET     /editday/:id                controllers.Application.editDayTarget(id:Long)
+POST    /editday/:id                controllers.Application.updateDayTarget(id:Long)
+
+# Delete DayTarget
+POST    /deleteday/:id              controllers.Application.deleteDayTarget(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

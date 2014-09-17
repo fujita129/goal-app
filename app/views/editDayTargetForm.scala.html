@@ -1,0 +1,30 @@
+@(id: Long, dayForm: Form[DayTarget])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main {
+
+    <h1>Edit DayTarget</h1>
+
+    @form(routes.Application.updateDayTarget(id)) {
+
+        <fieldset>
+
+            @inputText(dayForm("name"), '_label -> "Target name", '_help -> "")
+            @inputDate(dayForm("date"), '_label -> "Date", '_help -> "")
+
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" value="Save this DayTarget" class="btn primary"> or
+            <a href="@routes.Application.home()" class="btn">Cancel</a>
+        </div>
+
+    }
+
+    @form(routes.Application.deleteDayTarget(id), 'class -> "topRight") {
+        <input type="submit"  value="delete" class="btn danger">
+    }
+}
