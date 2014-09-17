@@ -1,20 +1,21 @@
 package models;
 
-import java.util.Date;
-
+import java.util.*;
 import javax.persistence.*;
-import play.db.ebean.Model.Finder;
-import play.data.validation.*;
-import play.data.format.*;
+
 import play.db.ebean.*;
+import play.data.format.*;
 import play.data.validation.*;
 
+/**
+ * DayTarget entity managed by Ebean
+ */
 @Entity
-public class DayTarget {
+public class DayTarget extends Model {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     public Long id;
 
     @Constraints.Required
@@ -23,6 +24,6 @@ public class DayTarget {
     @Formats.DateTime(pattern="yyyy-MM-dd")
     public Date date;
 
-    public static Finder<Long,DayTarget> findDayTarget = new Finder<Long,DayTarget>(Long.class, DayTarget.class);
+    public static Finder<Long,DayTarget> find = new Finder<Long,DayTarget>(Long.class, DayTarget.class);
 
 }

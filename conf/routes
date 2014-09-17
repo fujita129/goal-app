@@ -8,6 +8,9 @@ GET     /                           controllers.Application.index()
 # Home
 GET     /home                      controllers.Application.home()
 
+# Add DayTarget
+GET     /day/new                   controllers.Application.createDayTarget()
+POST    /day                       controllers.Application.saveDayTarget()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

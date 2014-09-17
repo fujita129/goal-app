@@ -4,26 +4,16 @@
 
 @main {
     <h2><font color="red">Today's Target</font></h2>
-    <tabel border="1">
-    	<thead>
-    		<tr>
-    			<td>Target</td>
-    		</tr>
-    	</thead>
-
-    	<tbody>
+    <table border="1">
+        <tbody>
     		@for(dayTarget <- dayTargets){
    			<tr>
-   				<td>
-					@dayTarget.name
-                </td>
-			</tr>
+                <td>@dayTarget.name</td>
+            </tr>
    			}
    			<tr>
-   				<td>
-   					<a href="@routes.Application.home()">Create new target</a>
-   				</td>
-   			</tr>
-   		</tbody>
-    </tabel>
+                <td><a href="@routes.Application.createDayTarget()">Create new target</a></td>
+            </tr>
+        </tbody>
+    </table>
 }
