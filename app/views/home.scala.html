@@ -4,7 +4,7 @@
 
 @main {
 	<h1>Welcome @userName</h1>
-    <h2>Your Today's Target</h2>
+    <h2>Your Targets</h2>
     <table border="1">
         <tbody>
     		@for(dayTarget <- dayTargets) {
@@ -15,16 +15,20 @@
    				}
    			}
    			<tr>
-   				<td><a href="@routes.Application.createDayTarget(userName)">make new target</a></td>
+   				<td><a href="@routes.Application.createDayTarget(userName)">create your new target</a></td>
    			</tr>
         </tbody>
     </table>
 
-    <h2>Other Challenger</h2>
+    <h2>Challengers</h2>
    	    <table border="1">
         <tbody>
     		@for(user <- allUser) {
-    			@if(user.name != userName) {
+    			@if(user.name == userName) {
+    				<tr>
+    					<td><@user.name</td>
+    				</tr>
+    			} else {
 	   				<tr>
     	            	<td><a href="@routes.Application.createDayTarget(user.name)">@user.name</a></td>
         	    	</tr>
