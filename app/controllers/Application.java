@@ -15,21 +15,67 @@ public class Application extends Controller {
         );
 
     public static Result index() {
-        return GO_HOME;
+        return redirect(routes.Application.register());
     }
 
     public static Result home() {
+        Form<User> userForm = form(User.class).bindFromRequest();
+    	Finder<Long, User> userFinder = new Finder<Long, User>(Long.class, User.class);
+    	List<User> allUser = userFinder.all();
+    	// sessionにセットした値を取得
+    	String userName = session("userName");
     	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
     	List<DayTarget> dayTargets = dayFinder.all();
     	return ok(
-    			home.render(dayTargets)
+    			home.render(allUser, dayTargets, userName)
     			);
     }
 
-    public static Result createDayTarget() {
+    public static Result register() {
+        Form<User> userForm = Form.form(User.class);
+        return ok(
+            registerForm.render(userForm)
+        );
+    }
+
+    public static Result submitRegister() {
+        Form<User> userForm = form(User.class).bindFromRequest();
+        userForm.get().save();
+        flash("success", "User " + userForm.get().name + " has been registerd");
+    	return redirect(routes.Application.login());
+    }
+
+    public static Result login() {
+        Form<User> userForm = Form.form(User.class);
+        return ok(
+            loginForm.render(userForm)
+        );
+    }
+
+    public static Result submitLogin() {
+        Form<User> userForm = form(User.class).bindFromRequest();
+    	Finder<Long, User> userFinder = new Finder<Long, User>(Long.class, User.class);
+    	List<User> users = userFinder.all();
+    	String formName, listName, formPass, listPass;
+    	formName = userForm.get().name;
+    	formPass = userForm.get().password;
+    	for(User user : users){
+    		listName = user.name;
+    		listPass = user.password;
+    		if( formName.equals(listName) && formPass.equals(listPass) ) {
+    			// sessionに値をセット
+    			session("userName", userForm.get().name);
+    			flash("success", "User " + userForm.get().name + " has been logined");
+    			return GO_HOME;
+    		}
+    	}
+    	return redirect(routes.Application.login());
+    }
+
+    public static Result createDayTarget(String targetUser) {
         Form<DayTarget> dayForm = Form.form(DayTarget.class);
         return ok(
-            createDayTargetForm.render(dayForm)
+            createDayTargetForm.render(dayForm, targetUser)
         );
     }
 

@@ -1,0 +1,26 @@
+@(loginForm: Form[User])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main {
+
+    <h1>Login</h1>
+
+    @form(routes.Application.submitLogin()) {
+
+        <fieldset>
+
+            @inputText(loginForm("name"), '_label -> "UserName", '_help -> "")
+            @inputText(loginForm("password"), '_label -> "Password", '_help -> "")
+
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" value="Login" class="btn primary">
+        </div>
+
+    }
+
+}

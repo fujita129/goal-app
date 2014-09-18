@@ -1,4 +1,4 @@
-@(dayForm: Form[DayTarget])
+@(dayForm: Form[DayTarget], targetUser:String)
 
 @import helper._
 
@@ -6,7 +6,7 @@
 
 @main {
 
-    <h1>Add a DayTarget</h1>
+    <h1>Add a DayTarget to @targetUser</h1>
 
     @form(routes.Application.saveDayTarget()) {
 
@@ -14,11 +14,12 @@
 
             @inputText(dayForm("name"), '_label -> "Target name", '_help -> "")
             @inputDate(dayForm("date"), '_label -> "Date", '_help -> "")
+			<input type="hidden" name="user" value=@targetUser />
 
         </fieldset>
 
         <div class="actions">
-            <input type="submit" value="Create this day" class="btn primary"> or
+            <input type="submit" value="Create this dayTarget" class="btn primary"> or
             <a href="@routes.Application.home()" class="btn">Cancel</a>
         </div>
 

@@ -1,19 +1,35 @@
-@(dayTargets: List[DayTarget])
+@(allUser: List[User], dayTargets: List[DayTarget], userName: String)
 
 @import helper._
 
 @main {
-    <h1>Today's Target</h1>
+	<h1>Welcome @userName</h1>
+    <h2>Your Today's Target</h2>
     <table border="1">
         <tbody>
-    		@for(dayTarget <- dayTargets){
-   			<tr>
-                <td><a href="@routes.Application.editDayTarget(dayTarget.id)">@dayTarget.name</a></td>
-            </tr>
+    		@for(dayTarget <- dayTargets) {
+    			@if(dayTarget.user==userName) {
+	   				<tr>
+    	            	<td>@dayTarget.name</td>
+        	    	</tr>
+   				}
    			}
    			<tr>
-                <td><a href="@routes.Application.createDayTarget()">Create new target</a></td>
-            </tr>
+   				<td><a href="@routes.Application.createDayTarget(userName)">make new target</a></td>
+   			</tr>
+        </tbody>
+    </table>
+
+    <h2>Other Challenger</h2>
+   	    <table border="1">
+        <tbody>
+    		@for(user <- allUser) {
+    			@if(user.name != userName) {
+	   				<tr>
+    	            	<td><a href="@routes.Application.createDayTarget(user.name)">@user.name</a></td>
+        	    	</tr>
+   				}
+   			}
         </tbody>
     </table>
 }

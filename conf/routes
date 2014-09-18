@@ -8,8 +8,16 @@ GET     /                           controllers.Application.index()
 # Home
 GET     /home                       controllers.Application.home()
 
+# Register
+GET     /register                   controllers.Application.register()
+POST    /register                   controllers.Application.submitRegister()
+
+# Login
+GET     /login                      controllers.Application.login()
+POST    /login                      controllers.Application.submitLogin()
+
 # Add DayTarget
-GET     /createday/new              controllers.Application.createDayTarget()
+GET     /createday/new              controllers.Application.createDayTarget(targetUser:String)
 POST    /createday                  controllers.Application.saveDayTarget()
 
 # Edit existing DayTarget
