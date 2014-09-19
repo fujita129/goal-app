@@ -27,8 +27,18 @@ public class Application extends Controller {
     	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
     	List<DayTarget> dayTargets = dayFinder.all();
     	return ok(
-    			home.render(allUser, dayTargets, userName)
-    			);
+    		home.render(allUser, dayTargets, userName)
+    	);
+    }
+
+    public static Result mypage(String userName) {
+    	// sessionにセットした値を取得
+    	String lookingUser = session("userName");
+    	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
+    	List<DayTarget> dayTargets = dayFinder.all();
+    	return ok(
+    		mypage.render(dayTargets, userName, lookingUser)
+    	);
     }
 
     public static Result register() {
@@ -72,10 +82,20 @@ public class Application extends Controller {
     	return redirect(routes.Application.login());
     }
 
+    public static Result logout() {
+    	// sessionの値をクリア
+    	session().remove("userName");
+    	return redirect(
+    		routes.Application.login()
+    	);
+    }
+
     public static Result createDayTarget(String targetUser) {
+    	// sessionにセットした値を取得
+    	String maker = session("userName");
         Form<DayTarget> dayForm = Form.form(DayTarget.class);
         return ok(
-            createDayTargetForm.render(dayForm, targetUser)
+            createDayTargetForm.render(dayForm, targetUser, maker)
         );
     }
 
@@ -83,32 +103,35 @@ public class Application extends Controller {
         Form<DayTarget> dayForm = form(DayTarget.class).bindFromRequest();
         dayForm.get().save();
         flash("success", "DayTarget " + dayForm.get().name + " has been created");
-        return GO_HOME;
+        return redirect(
+        	routes.Application.mypage(dayForm.get().usrname)
+        );
     }
 
-    public static Result editDayTarget(Long id) {
+    public static Result editDayTarget(Long id, String targetUser, String maker) {
         Form<DayTarget> dayForm = form(DayTarget.class).fill(
             DayTarget.findDayTarget.byId(id)
         );
         return ok(
-            editDayTargetForm.render(id, dayForm)
+            editDayTargetForm.render(id, dayForm, targetUser, maker)
         );
     }
 
     public static Result updateDayTarget(Long id) {
         Form<DayTarget> dayForm = form(DayTarget.class).bindFromRequest();
-        if(dayForm.hasErrors()) {
-            return badRequest(editDayTargetForm.render(id, dayForm));
-        }
         dayForm.get().update(id);
         flash("success", "DayTarget " + dayForm.get().name + " has been updated");
-        return GO_HOME;
+        return redirect(
+    		routes.Application.mypage(dayForm.get().usrname)
+    	);
     }
 
-    public static Result deleteDayTarget(Long id) {
+    public static Result deleteDayTarget(Long id, String userName) {
         DayTarget.findDayTarget.ref(id).delete();
         flash("success", "DayTarget has been deleted");
-        return GO_HOME;
+        return redirect(
+    		routes.Application.mypage(userName)
+    	);
     }
 
 }

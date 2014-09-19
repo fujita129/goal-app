@@ -3,37 +3,21 @@
 @import helper._
 
 @main {
-	<h1>Welcome @userName</h1>
-    <h2>Your Targets</h2>
-    <table border="1">
+	<h1>ようこそ @userName さん</h1>
+	<a href="@routes.Application.mypage(userName)" class="btn">マイページへ</a>
+
+    <h2>他の参加者</h2>
+   	    <table>
         <tbody>
-    		@for(dayTarget <- dayTargets) {
-    			@if(dayTarget.usrname==userName) {
+    		@for(user <- allUser) {
+    			@if(user.name != userName) {
 	   				<tr>
-    	            	<td>@dayTarget.name</td>
+    	            	<td><a href="@routes.Application.mypage(user.name)">@user.name</a></td>
         	    	</tr>
    				}
    			}
-   			<tr>
-   				<td><a href="@routes.Application.createDayTarget(userName)">create your new target</a></td>
-   			</tr>
         </tbody>
     </table>
 
-    <h2>Challengers</h2>
-   	    <table border="1">
-        <tbody>
-    		@for(user <- allUser) {
-    			@if(user.name == userName) {
-    				<tr>
-    					<td><@user.name</td>
-    				</tr>
-    			} else {
-	   				<tr>
-    	            	<td><a href="@routes.Application.createDayTarget(user.name)">@user.name</a></td>
-        	    	</tr>
-   				}
-   			}
-        </tbody>
-    </table>
+    <a href="@routes.Application.logout()" class="btn">ログアウト</a>
 }

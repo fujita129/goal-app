@@ -1,4 +1,4 @@
-@(id: Long, dayForm: Form[DayTarget])
+@(id: Long, dayForm: Form[DayTarget], targetUser: String, maker: String)
 
 @import helper._
 
@@ -6,25 +6,22 @@
 
 @main {
 
-    <h1>Edit DayTarget</h1>
+    <h1>ターゲットの編集</h1>
 
     @form(routes.Application.updateDayTarget(id)) {
 
         <fieldset>
 
-            @inputText(dayForm("name"), '_label -> "Target name", '_help -> "")
-            @inputDate(dayForm("date"), '_label -> "Date", '_help -> "")
+            @inputText(dayForm("name"), '_label -> "ターゲット名", '_help -> "")
+			<input type="hidden" name="usrname" value=@targetUser />
+			<input type="hidden" name="maker"   value=@maker />
 
         </fieldset>
 
         <div class="actions">
-            <input type="submit" value="Save this DayTarget" class="btn primary"> or
-            <a href="@routes.Application.home()" class="btn">Cancel</a>
+            <input type="submit" value="更新" class="btn primary"> or
+            <a href="@routes.Application.mypage(targetUser)" class="btn">キャンセル</a>
         </div>
 
-    }
-
-    @form(routes.Application.deleteDayTarget(id), 'class -> "topRight") {
-        <input type="submit"  value="delete" class="btn danger">
     }
 }

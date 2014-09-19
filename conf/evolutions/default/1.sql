@@ -6,7 +6,8 @@ create table day_target (
   id                        bigint not null,
   name                      varchar(255),
   date                      timestamp,
-  usrname                  varchar(255),
+  usrname                   varchar(255),
+  maker                     varchar(255),
   constraint pk_day_target primary key (id))
 ;
 

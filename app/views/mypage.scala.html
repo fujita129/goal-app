@@ -1,0 +1,36 @@
+@(dayTargets: List[DayTarget], userName: String, lookingUser:String)
+
+@import helper._
+
+@main {
+	<h1>@userName さんのページ</h1>
+    <h2>未達成のターゲット</h2>
+    <table>
+        <tbody>
+    		@for(dayTarget <- dayTargets) {
+    			@if(dayTarget.usrname == userName) {
+	   				<tr>
+	   					@if(dayTarget.maker == lookingUser){
+	   						<td><a href="@routes.Application.editDayTarget(dayTarget.id, userName, lookingUser)">@dayTarget.name</a></td>
+	   					} else {
+	    	            	<td>@dayTarget.name</td>
+	    	            }
+	    				@if(userName == lookingUser){
+    						<td><a href="@routes.Application.deleteDayTarget(dayTarget.id, userName)">クリア</a></td>
+    					}
+    				</tr>
+   				}
+   			}
+   			<tr>
+   				<td><a href="@routes.Application.createDayTarget(userName)">ターゲットを作成</a></td>
+   			</tr>
+        </tbody>
+    </table>
+
+    <h2>今月の目標</h2>
+   	    <table>
+        <tbody>
+			<td>ゴール</td>
+        </tbody>
+    </table>
+}

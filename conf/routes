@@ -8,6 +8,9 @@ GET     /                           controllers.Application.index()
 # Home
 GET     /home                       controllers.Application.home()
 
+# Mypage
+GET     /mypage                     controllers.Application.mypage(userName:String)
+
 # Register
 GET     /register                   controllers.Application.register()
 POST    /register                   controllers.Application.submitRegister()
@@ -16,16 +19,19 @@ POST    /register                   controllers.Application.submitRegister()
 GET     /login                      controllers.Application.login()
 POST    /login                      controllers.Application.submitLogin()
 
+# Logout
+GET     /logout                     controllers.Application.logout()
+
 # Add DayTarget
 GET     /createday/new              controllers.Application.createDayTarget(targetUser:String)
 POST    /createday                  controllers.Application.saveDayTarget()
 
 # Edit existing DayTarget
-GET     /editday/:id                controllers.Application.editDayTarget(id:Long)
+GET     /editday/:id                controllers.Application.editDayTarget(id:Long, targetUser:String, maker:String)
 POST    /editday/:id                controllers.Application.updateDayTarget(id:Long)
 
 # Delete DayTarget
-POST    /deleteday/:id              controllers.Application.deleteDayTarget(id:Long)
+GET     /deleteday/:id              controllers.Application.deleteDayTarget(id:Long, userName:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
