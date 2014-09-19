@@ -18,9 +18,18 @@ create table usr_info (
   constraint pk_usr_info primary key (id))
 ;
 
-create sequence usr_info_seq start with 1000;
+create table goal (
+  id                        bigint not null,
+  name                      varchar(255),
+  usrname                   varchar(255),
+  constraint goal primary key (id))
+;
 
 create sequence day_target_seq start with 1000;
+
+create sequence usr_info_seq start with 1000;
+
+create sequence goal_seq start with 1000;
 
 # --- !Downs
 
@@ -30,8 +39,12 @@ drop table if exists day_target;
 
 drop table if exists usr_info;
 
+drop table if exists goal;
+
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists day_target_seq;
 
 drop sequence if exists usr_info_seq;
+
+drop sequence if exists goal_seq;

@@ -33,5 +33,9 @@ POST    /editday/:id                controllers.Application.updateDayTarget(id:L
 # Delete DayTarget
 GET     /deleteday/:id              controllers.Application.deleteDayTarget(id:Long, userName:String)
 
+# Add Goal
+GET     /creategoal/new             controllers.Application.createGoal()
+POST    /creategoal                 controllers.Application.saveGoal()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

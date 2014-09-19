@@ -36,8 +36,10 @@ public class Application extends Controller {
     	String lookingUser = session("userName");
     	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
     	List<DayTarget> dayTargets = dayFinder.all();
+    	Finder<Long, Goal> goalFinder = new Finder<Long, Goal>(Long.class, Goal.class);
+    	List<Goal> goals = goalFinder.all();
     	return ok(
-    		mypage.render(dayTargets, userName, lookingUser)
+    		mypage.render(dayTargets, userName, lookingUser, goals)
     	);
     }
 
@@ -132,6 +134,24 @@ public class Application extends Controller {
         return redirect(
     		routes.Application.mypage(userName)
     	);
+    }
+
+    public static Result createGoal() {
+    	// sessionにセットした値を取得
+    	String userName = session("userName");
+        Form<Goal> goalForm = Form.form(Goal.class);
+        return ok(
+            createGoalForm.render(goalForm, userName)
+        );
+    }
+
+    public static Result saveGoal() {
+        Form<Goal> goalForm = form(Goal.class).bindFromRequest();
+        goalForm.get().save();
+        flash("success", "DayTarget " + goalForm.get().name + " has been created");
+        return redirect(
+        	routes.Application.mypage(goalForm.get().usrname)
+        );
     }
 
 }

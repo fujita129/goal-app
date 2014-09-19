@@ -1,0 +1,22 @@
+@(goalForm: Form[Goal], userName:String)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main {
+
+    <h1>目標を立てる</h1>
+
+    @form(routes.Application.saveGoal()) {
+        <fieldset>
+            @inputText(goalForm("name"), '_label -> "目標名", '_help -> "")
+			<input type="hidden" name="usrname" value=@userName />
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" value="作成" class="btn primary"> or
+            <a href="@routes.Application.mypage(userName)" class="btn">キャンセル</a>
+        </div>
+    }
+}
