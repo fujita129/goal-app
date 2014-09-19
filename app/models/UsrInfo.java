@@ -9,7 +9,7 @@ import play.data.validation.*;
  * User entity managed by Ebean
  */
 @Entity
-public class User extends Model {
+public class UsrInfo extends Model {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,6 +22,6 @@ public class User extends Model {
     @Constraints.Required
     public String password;
 
-    public static Finder<Long,User> findUser = new Finder<Long,User>(Long.class, User.class);
+    public static Finder<Long,UsrInfo> findUser = new Finder<Long,UsrInfo>(Long.class, UsrInfo.class);
 
 }

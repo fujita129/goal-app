@@ -25,7 +25,7 @@ public class DayTarget extends Model {
     public Date date;
 
     @Constraints.Required
-    public String user;
+    public String usrname;
 
     public static Finder<Long,DayTarget> findDayTarget = new Finder<Long,DayTarget>(Long.class, DayTarget.class);
 

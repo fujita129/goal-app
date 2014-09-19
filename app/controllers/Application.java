@@ -19,9 +19,9 @@ public class Application extends Controller {
     }
 
     public static Result home() {
-        Form<User> userForm = form(User.class).bindFromRequest();
-    	Finder<Long, User> userFinder = new Finder<Long, User>(Long.class, User.class);
-    	List<User> allUser = userFinder.all();
+        Form<UsrInfo> userForm = form(UsrInfo.class).bindFromRequest();
+    	Finder<Long, UsrInfo> userFinder = new Finder<Long, UsrInfo>(Long.class, UsrInfo.class);
+    	List<UsrInfo> allUser = userFinder.all();
     	// sessionにセットした値を取得
     	String userName = session("userName");
     	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
@@ -32,34 +32,34 @@ public class Application extends Controller {
     }
 
     public static Result register() {
-        Form<User> userForm = Form.form(User.class);
+        Form<UsrInfo> userForm = Form.form(UsrInfo.class);
         return ok(
             registerForm.render(userForm)
         );
     }
 
     public static Result submitRegister() {
-        Form<User> userForm = form(User.class).bindFromRequest();
+        Form<UsrInfo> userForm = form(UsrInfo.class).bindFromRequest();
         userForm.get().save();
         flash("success", "User " + userForm.get().name + " has been registerd");
     	return redirect(routes.Application.login());
     }
 
     public static Result login() {
-        Form<User> userForm = Form.form(User.class);
+        Form<UsrInfo> userForm = Form.form(UsrInfo.class);
         return ok(
             loginForm.render(userForm)
         );
     }
 
     public static Result submitLogin() {
-        Form<User> userForm = form(User.class).bindFromRequest();
-    	Finder<Long, User> userFinder = new Finder<Long, User>(Long.class, User.class);
-    	List<User> users = userFinder.all();
+        Form<UsrInfo> userForm = form(UsrInfo.class).bindFromRequest();
+    	Finder<Long, UsrInfo> userFinder = new Finder<Long, UsrInfo>(Long.class, UsrInfo.class);
+    	List<UsrInfo> users = userFinder.all();
     	String formName, listName, formPass, listPass;
     	formName = userForm.get().name;
     	formPass = userForm.get().password;
-    	for(User user : users){
+    	for(UsrInfo user : users){
     		listName = user.name;
     		listPass = user.password;
     		if( formName.equals(listName) && formPass.equals(listPass) ) {

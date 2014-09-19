@@ -1,4 +1,4 @@
-@(allUser: List[User], dayTargets: List[DayTarget], userName: String)
+@(allUser: List[UsrInfo], dayTargets: List[DayTarget], userName: String)
 
 @import helper._
 
@@ -8,7 +8,7 @@
     <table border="1">
         <tbody>
     		@for(dayTarget <- dayTargets) {
-    			@if(dayTarget.user==userName) {
+    			@if(dayTarget.usrname==userName) {
 	   				<tr>
     	            	<td>@dayTarget.name</td>
         	    	</tr>
