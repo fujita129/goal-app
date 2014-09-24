@@ -22,7 +22,7 @@
    				}
    			}
    			<tr>
-   				<td><a href="@routes.Application.createDayTarget(userName)">ターゲットを作成</a></td>
+   				<td><a href="@routes.Application.createDayTarget(userName)">ターゲットの作成</a></td>
    			</tr>
         </tbody>
     </table>
@@ -37,9 +37,11 @@
         			</tr>
        			}
        		}
-   			<tr>
-   				<td><a href="@routes.Application.createGoal()">目標を立てる</a></td>
-   			</tr>
+       		@if(userName == lookingUser) {
+   				<tr>
+   					<td><a href="@routes.Application.createGoal()">目標を立てる</a></td>
+   				</tr>
+   			}
         </tbody>
     </table>
 }
