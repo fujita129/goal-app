@@ -4,10 +4,15 @@
 
 @main {
 	<h1>ようこそ @userName さん</h1>
-	<a href="@routes.Application.mypage(userName)" class="btn">マイページへ</a>
+	<a href="@routes.Application.mypage(userName)" class="btn btn-primary">マイページへ</a>
 
     <h2>他の参加者</h2>
-   	    <table>
+   	    <table class="table table-striped table-bordered">
+   	    <thead>
+   	    	<tr>
+   	    		<td>ユーザ名</td>
+   	    	</tr>
+   	    </thead>
         <tbody>
     		@for(user <- allUser) {
     			@if(user.name != userName) {
@@ -19,5 +24,4 @@
         </tbody>
     </table>
 
-    <a href="@routes.Application.logout()" class="btn">ログアウト</a>
 }

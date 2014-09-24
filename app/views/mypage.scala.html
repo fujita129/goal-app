@@ -3,45 +3,63 @@
 @import helper._
 
 @main {
+	<div class=menu>
 	<h1>@userName さんのページ</h1>
+	</div>
+	<div class=target>
     <h2>未達成のターゲット</h2>
-    <table>
+    <table class="table table-striped table-bordered">
+    	<thead>
+    		<tr>
+    			<td>ターゲット名</td>
+    			<td>作った人</td>
+    			@if(userName == lookingUser) {
+    		    	<td></td>
+    		    }
+    		</tr>
+    	</thead>
         <tbody>
     		@for(dayTarget <- dayTargets) {
     			@if(dayTarget.usrname == userName) {
 	   				<tr>
 	   					@if(dayTarget.maker == lookingUser) {
 	   						<td><a href="@routes.Application.editDayTarget(dayTarget.id, userName, lookingUser)">@dayTarget.name</a></td>
+	   						<td>@dayTarget.maker</td>
 	   					} else {
 	    	            	<td>@dayTarget.name</td>
+	    	            	<td>@dayTarget.maker</td>
 	    	            }
 	    				@if(userName == lookingUser) {
-    						<td><a href="@routes.Application.deleteDayTarget(dayTarget.id, userName)">クリア</a></td>
+    						<td><a href="@routes.Application.deleteDayTarget(dayTarget.id, userName)" class="btn btn-xs btn-primary">クリア</a></td>
     					}
     				</tr>
    				}
    			}
-   			<tr>
-   				<td><a href="@routes.Application.createDayTarget(userName)">ターゲットの作成</a></td>
-   			</tr>
         </tbody>
     </table>
+    <a href="@routes.Application.createDayTarget(userName)" class="btn btn-primary" >ターゲットを作成</a>
+	</div>
 
-    <h2>今月の目標</h2>
-   	    <table>
+	<div class=goal>
+    <h2>今後の目標</h2>
+   	    <table class="table table-striped table-bordered">
+   	    <thead>
+   	    	<tr>
+   	    		<td>今月の目標</td>
+   	    	</tr>
+   	    </thead>
         <tbody>
         	@for(goal <- goals) {
 	        	@if(goal.usrname == userName) {
     	    		<tr>
-        				<td>@goal.name</td>
+        				<td><a href="@routes.Application.editGoal(goal.id)">@goal.name</a></td>
         			</tr>
        			}
        		}
-       		@if(userName == lookingUser) {
-   				<tr>
-   					<td><a href="@routes.Application.createGoal()">目標を立てる</a></td>
-   				</tr>
-   			}
         </tbody>
     </table>
+    @if(userName == lookingUser) {
+    	<a href="@routes.Application.createGoal()" class="btn btn-primary" >目標を立てる</a>
+    }
+    </div>
 }

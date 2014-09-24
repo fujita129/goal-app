@@ -4,24 +4,32 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
-@main {
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ユーザー登録</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+</head>
 
-    <h1>ユーザ登録</h1>
-
+<body>
+  <div id="form">
+    <h2>ユーザー登録</h2>
     @form(routes.Application.submitRegister()) {
 
-        <fieldset>
+        <p>ユーザーID</p>
+        @inputText(userForm("name"), '_label -> "", '_help -> "")
+        <p>パスワード</p>
+        @inputPassword(userForm("password"), '_label -> "", '_help -> "")
 
-            @inputText(userForm("name"), '_label -> "ユーザネーム", '_help -> "")
-            @inputText(userForm("password"), '_label -> "パスワード", '_help -> "")
-
-        </fieldset>
-
-        <div class="actions">
-            <input type="submit" value="登録" class="btn primary"> or
-            <a href="@routes.Application.login()" class="btn">ログインへ</a>
-        </div>
-
+      <br>
+      <p class="submit"><input type="submit" value="登録" class="btn btn-lg btn-primary btn-block"></p>
+      <br>
+      既にユーザー登録がお済みの方は<a href="@routes.Application.login()">こちら</a>へ
     }
 
-}
+  </div>
+</body>
+</html>

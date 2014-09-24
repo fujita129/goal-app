@@ -9,6 +9,7 @@ GET     /                           controllers.Application.index()
 GET     /home                       controllers.Application.home()
 
 # Mypage
+GET     /mymypage                   controllers.Application.mymypage()
 GET     /mypage                     controllers.Application.mypage(userName:String)
 
 # Register
@@ -36,6 +37,13 @@ GET     /deleteday/:id              controllers.Application.deleteDayTarget(id:L
 # Add Goal
 GET     /creategoal/new             controllers.Application.createGoal()
 POST    /creategoal                 controllers.Application.saveGoal()
+
+# Edit existing Goal
+GET     /editgoal/:id                controllers.Application.editGoal(id:Long)
+POST    /editgoal/:id                controllers.Application.updateGoal(id:Long)
+
+# Delete Goal
+GET     /deletegoal/:id              controllers.Application.deleteGoal(id:Long, userName:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

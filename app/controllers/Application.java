@@ -31,6 +31,18 @@ public class Application extends Controller {
     	);
     }
 
+    public static Result mymypage() {
+    	// sessionにセットした値を取得
+    	String userName = session("userName");
+    	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
+    	List<DayTarget> dayTargets = dayFinder.all();
+    	Finder<Long, Goal> goalFinder = new Finder<Long, Goal>(Long.class, Goal.class);
+    	List<Goal> goals = goalFinder.all();
+    	return ok(
+    		mypage.render(dayTargets, userName, userName, goals)
+    	);
+    }
+
     public static Result mypage(String userName) {
     	// sessionにセットした値を取得
     	String lookingUser = session("userName");
@@ -52,6 +64,14 @@ public class Application extends Controller {
 
     public static Result submitRegister() {
         Form<UsrInfo> userForm = form(UsrInfo.class).bindFromRequest();
+    	Finder<Long, UsrInfo> userFinder = new Finder<Long, UsrInfo>(Long.class, UsrInfo.class);
+    	List<UsrInfo> users = userFinder.all();
+    	for(UsrInfo user : users){
+    		if(user.name.equals(userForm.get().name)){
+    			flash("このユーザーIDは既に登録されています");
+    			return redirect(routes.Application.register());
+    		}
+    	}
         userForm.get().save();
         flash("success", "User " + userForm.get().name + " has been registerd");
     	return redirect(routes.Application.login());
@@ -153,5 +173,31 @@ public class Application extends Controller {
         	routes.Application.mypage(goalForm.get().usrname)
         );
     }
+    public static Result editGoal(Long id) {
+    	// sessionにセットした値を取得
+    	String userName = session("userName");
+        Form<Goal> goalForm = form(Goal.class).fill(
+            Goal.findGoal.byId(id)
+        );
+        return ok(
+            editGoalForm.render(id, goalForm, userName)
+        );
+    }
 
+    public static Result updateGoal(Long id) {
+        Form<Goal> goalForm = form(Goal.class).bindFromRequest();
+        goalForm.get().update(id);
+        flash("success", "Goal " + goalForm.get().name + " has been updated");
+        return redirect(
+    		routes.Application.mypage(goalForm.get().usrname)
+    	);
+    }
+
+    public static Result deleteGoal(Long id, String userName) {
+        Goal.findGoal.ref(id).delete();
+        flash("success", "Goal has been deleted");
+        return redirect(
+    		routes.Application.mypage(userName)
+    	);
+    }
 }
