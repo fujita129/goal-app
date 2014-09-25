@@ -68,12 +68,11 @@ public class Application extends Controller {
     	List<UsrInfo> users = userFinder.all();
     	for(UsrInfo user : users){
     		if(user.name.equals(userForm.get().name)){
-    			flash("このユーザーIDは既に登録されています");
+    			flash("false", "このユーザーIDは既に登録されています");
     			return redirect(routes.Application.register());
     		}
     	}
         userForm.get().save();
-        flash("success", "User " + userForm.get().name + " has been registerd");
     	return redirect(routes.Application.login());
     }
 
@@ -97,10 +96,10 @@ public class Application extends Controller {
     		if( formName.equals(listName) && formPass.equals(listPass) ) {
     			// sessionに値をセット
     			session("userName", userForm.get().name);
-    			flash("success", "User " + userForm.get().name + " has been logined");
     			return GO_HOME;
     		}
     	}
+		flash("false", "ユーザIDとパスワードが一致しません");
     	return redirect(routes.Application.login());
     }
 
@@ -124,7 +123,6 @@ public class Application extends Controller {
     public static Result saveDayTarget() {
         Form<DayTarget> dayForm = form(DayTarget.class).bindFromRequest();
         dayForm.get().save();
-        flash("success", "DayTarget " + dayForm.get().name + " has been created");
         return redirect(
         	routes.Application.mypage(dayForm.get().usrname)
         );
@@ -142,7 +140,6 @@ public class Application extends Controller {
     public static Result updateDayTarget(Long id) {
         Form<DayTarget> dayForm = form(DayTarget.class).bindFromRequest();
         dayForm.get().update(id);
-        flash("success", "DayTarget " + dayForm.get().name + " has been updated");
         return redirect(
     		routes.Application.mypage(dayForm.get().usrname)
     	);
@@ -150,7 +147,6 @@ public class Application extends Controller {
 
     public static Result deleteDayTarget(Long id, String userName) {
         DayTarget.findDayTarget.ref(id).delete();
-        flash("success", "DayTarget has been deleted");
         return redirect(
     		routes.Application.mypage(userName)
     	);
@@ -168,7 +164,6 @@ public class Application extends Controller {
     public static Result saveGoal() {
         Form<Goal> goalForm = form(Goal.class).bindFromRequest();
         goalForm.get().save();
-        flash("success", "Goal" + " has been created");
         return redirect(
         	routes.Application.mypage(goalForm.get().usrname)
         );
@@ -187,7 +182,6 @@ public class Application extends Controller {
     public static Result updateGoal(Long id) {
         Form<Goal> goalForm = form(Goal.class).bindFromRequest();
         goalForm.get().update(id);
-        flash("success", "Goal" + " has been updated");
         return redirect(
     		routes.Application.mypage(goalForm.get().usrname)
     	);
@@ -195,7 +189,6 @@ public class Application extends Controller {
 
     public static Result deleteGoal(Long id, String userName) {
         Goal.findGoal.ref(id).delete();
-        flash("success", "Goal has been deleted");
         return redirect(
     		routes.Application.mypage(userName)
     	);

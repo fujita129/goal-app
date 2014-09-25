@@ -21,15 +21,19 @@
 
         <p>ユーザーID</p>
         @inputText(userForm("name"), '_label -> "", '_help -> "")
+        @if(flash.containsKey("false")) {
+          <p><font color="red">@flash.get("false")</font></p>
+        }
         <p>パスワード</p>
         @inputPassword(userForm("password"), '_label -> "", '_help -> "")
 
-      <br>
-      <p class="submit"><input type="submit" value="登録" class="btn btn-lg btn-primary btn-block"></p>
-      <br>
-      既にユーザー登録がお済みの方は<a href="@routes.Application.login()">こちら</a>へ
-    }
+      <br><p class="submit"><input type="submit" value="登録" class="btn btn-lg btn-primary btn-block"></p>
+      <br>既にユーザー登録がお済みの方は<a href="@routes.Application.login()">こちら</a>へ
 
+    }
   </div>
+
+
+
 </body>
 </html>

@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
   <div id="form">
     <h2>ログインしてください</h2>
     @form(routes.Application.submitLogin()) {
@@ -24,10 +25,12 @@
         <p>パスワード</p>
         @inputPassword(loginForm("password"), '_label -> "", '_help -> "")
 
-      <br>
-      <p class="submit"><input type="submit" value="ログイン" class="btn btn-lg btn-primary btn-block"></p>
+      <br><p class="submit"><input type="submit" value="ログイン" class="btn btn-lg btn-primary btn-block"></p>
+      @if(flash.containsKey("false")) {
+        <br><p><font color="red">@flash.get("false")</font></p>
+      }
     }
-
   </div>
+
 </body>
 </html>
