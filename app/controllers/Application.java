@@ -168,7 +168,7 @@ public class Application extends Controller {
     public static Result saveGoal() {
         Form<Goal> goalForm = form(Goal.class).bindFromRequest();
         goalForm.get().save();
-        flash("success", "DayTarget " + goalForm.get().name + " has been created");
+        flash("success", "Goal" + " has been created");
         return redirect(
         	routes.Application.mypage(goalForm.get().usrname)
         );
@@ -187,7 +187,7 @@ public class Application extends Controller {
     public static Result updateGoal(Long id) {
         Form<Goal> goalForm = form(Goal.class).bindFromRequest();
         goalForm.get().update(id);
-        flash("success", "Goal " + goalForm.get().name + " has been updated");
+        flash("success", "Goal" + " has been updated");
         return redirect(
     		routes.Application.mypage(goalForm.get().usrname)
     	);

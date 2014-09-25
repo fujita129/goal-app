@@ -21,8 +21,9 @@ public class DayTarget extends Model {
     @Constraints.Required
     public String name;
 
-    @Formats.DateTime(pattern="yyyy-MM-dd")
-    public Date date;
+    @Version
+    @Formats.DateTime(pattern="yyyy-MM-dd hh:mm:ss")
+    public Date date = new Date();
 
     @Constraints.Required
     public String usrname;

@@ -16,8 +16,13 @@ public class Goal extends Model {
 	@Id
     public Long id;
 
-    @Constraints.Required
-    public String name;
+    public String week;
+
+    public String month;
+
+    public String year;
+
+    public String decade;
 
     @Constraints.Required
     public String usrname;

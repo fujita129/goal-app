@@ -11,8 +11,9 @@
     @form(routes.Application.updateGoal(id)) {
 
         <fieldset>
-
-            @inputText(goalForm("name"), '_label -> "目標名", '_help -> "")
+            @inputText(goalForm("week"), '_label -> "今週の目標", '_help -> "")
+            @inputText(goalForm("month"), '_label -> "今月の目標", '_help -> "")
+            @inputText(goalForm("year"), '_label -> "今年の目標", '_help -> "")
 			<input type="hidden" name="usrname" value=@userName />
 
         </fieldset>

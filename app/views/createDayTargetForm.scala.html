@@ -6,18 +6,18 @@
 
 @main {
 
-    <h1>@targetUser さんへのターゲット作成</h1>
+    <h1>@targetUser さんに向けてターゲットを作る</h1>
 
     @form(routes.Application.saveDayTarget()) {
         <fieldset>
-            @inputText(dayForm("name"), '_label -> "ターゲット名", '_help -> "")
+            @inputText(dayForm("name"), '_label -> "ターゲット", '_help -> "")
 			<input type="hidden" name="usrname" value=@targetUser />
 			<input type="hidden" name="maker"   value=@maker />
         </fieldset>
-
+		<br>
         <div class="actions">
-            <input type="submit" value="作成" class="btn primary"> or
-            <a href="@routes.Application.mypage(targetUser)" class="btn">キャンセル</a>
+            <input type="submit" value="作成" class="btn btn-primary"> or
+            <a href="@routes.Application.mypage(targetUser)" class="btn btn-primary">キャンセル</a>
         </div>
     }
 }
