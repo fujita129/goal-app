@@ -145,6 +145,17 @@ public class Application extends Controller {
     	);
     }
 
+    public static Result clearDayTarget(Long id, String userName) {
+
+        DayTarget clearedDayTarget = DayTarget.findDayTarget.byId(id);
+        clearedDayTarget.cleared = true;
+        clearedDayTarget.date = DayTarget.createJST();
+        clearedDayTarget.save();
+        return redirect(
+    		routes.Application.mypage(userName)
+    	);
+    }
+
     public static Result deleteDayTarget(Long id, String userName) {
         DayTarget.findDayTarget.ref(id).delete();
         return redirect(

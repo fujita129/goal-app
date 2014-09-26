@@ -31,6 +31,9 @@ POST    /createday                  controllers.Application.saveDayTarget()
 GET     /editday/:id                controllers.Application.editDayTarget(id:Long, targetUser:String, maker:String)
 POST    /editday/:id                controllers.Application.updateDayTarget(id:Long)
 
+# Clear DayTarget
+GET     /clear/:id                  controllers.Application.clearDayTarget(id:Long, userName:String)
+
 # Delete DayTarget
 GET     /deleteday/:id              controllers.Application.deleteDayTarget(id:Long, userName:String)
 

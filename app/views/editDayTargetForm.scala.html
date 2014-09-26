@@ -12,15 +12,16 @@
 
         <fieldset>
 
-            @inputText(dayForm("name"), '_label -> "ターゲット名", '_help -> "")
+            @inputText(dayForm("name"), '_label -> "ターゲット", '_help -> "")
 			<input type="hidden" name="usrname" value=@targetUser />
 			<input type="hidden" name="maker"   value=@maker />
 
         </fieldset>
 
         <div class="actions">
-            <input type="submit" value="更新" class="btn primary"> or
-            <a href="@routes.Application.mypage(targetUser)" class="btn">キャンセル</a>
+        <br>
+            <input type="submit" value="更新" class="btn btn-success"> or
+            <a href="@routes.Application.mypage(targetUser)" class="btn btn-default">キャンセル</a>
         </div>
 
     }
