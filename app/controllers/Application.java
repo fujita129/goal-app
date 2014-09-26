@@ -55,6 +55,30 @@ public class Application extends Controller {
     	);
     }
 
+    public static Result mymyrecord() {
+    	// sessionにセットした値を取得
+    	String userName = session("userName");
+    	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
+    	List<DayTarget> dayTargets = dayFinder.all();
+    	Finder<Long, Goal> goalFinder = new Finder<Long, Goal>(Long.class, Goal.class);
+    	List<Goal> goals = goalFinder.all();
+    	return ok(
+    		myrecord.render(dayTargets, userName, userName, goals)
+    	);
+    }
+
+    public static Result myrecord(String userName) {
+    	// sessionにセットした値を取得
+    	String lookingUser = session("userName");
+    	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
+    	List<DayTarget> dayTargets = dayFinder.all();
+    	Finder<Long, Goal> goalFinder = new Finder<Long, Goal>(Long.class, Goal.class);
+    	List<Goal> goals = goalFinder.all();
+    	return ok(
+    		myrecord.render(dayTargets, userName, lookingUser, goals)
+    	);
+    }
+
     public static Result register() {
         Form<UsrInfo> userForm = Form.form(UsrInfo.class);
         return ok(
@@ -149,18 +173,24 @@ public class Application extends Controller {
 
         DayTarget clearedDayTarget = DayTarget.findDayTarget.byId(id);
         clearedDayTarget.cleared = true;
-        clearedDayTarget.date = DayTarget.createJST();
+        clearedDayTarget.cleardate = DayTarget.createJST();
         clearedDayTarget.save();
         return redirect(
     		routes.Application.mypage(userName)
     	);
     }
 
-    public static Result deleteDayTarget(Long id, String userName) {
+    public static Result deleteDayTarget(Long id, String userName, boolean fromMypage) {
         DayTarget.findDayTarget.ref(id).delete();
-        return redirect(
-    		routes.Application.mypage(userName)
-    	);
+        if(fromMypage){
+        	return redirect(
+        			routes.Application.mypage(userName)
+			);
+        } else {
+        	return redirect(
+        			routes.Application.myrecord(userName)
+			);
+        }
     }
 
     public static Result createGoal() {

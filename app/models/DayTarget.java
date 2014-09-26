@@ -32,6 +32,8 @@ public class DayTarget extends Model {
 
     public String date = createJST();
 
+    public String cleardate;
+
     @Constraints.Required
     public String usrname;
 

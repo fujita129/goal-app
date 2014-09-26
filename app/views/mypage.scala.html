@@ -3,11 +3,11 @@
 @import helper._
 
 @main {
-	<div class=menu>
+	<div class="page-header">
 	<h1>@userName さんのマイページ</h1>
 	</div>
 	<div class=target>
-    <h2>ターゲット</h2>
+    <h2 class="point2">ターゲット</h2>
     <table class="table table-striped table-bordered">
     	<thead>
     		<tr>
@@ -35,7 +35,7 @@
 		    	            }
 		    				@if(userName == lookingUser) {
 		    					<td><a href="@routes.Application.clearDayTarget(dayTarget.id, userName)" class="btn btn-xs btn-warning">クリア</a>
-	    						<a href="@routes.Application.deleteDayTarget(dayTarget.id, userName)" class="btn btn-xs btn-danger">削除</a></td>
+	    						<a href="@routes.Application.deleteDayTarget(dayTarget.id, userName, true)" class="btn btn-xs btn-danger">削除</a></td>
 	    					}
 	    				</tr>
     				}
@@ -48,7 +48,7 @@
 
 	<br>
 	<div class=goal>
-    <h2>目標</h2>
+    <h2 class="point2">目標</h2>
 	<table class="table table-striped table-bordered">
    	    <thead>
    	    	<tr>
@@ -128,38 +128,4 @@
 	    }
     }
     </div>
-
-    <br><br>
-	<div class=clearedtarget>
-    <h3>クリア済み</h3>
-    <table class="table table-bordered">
-    	<thead>
-    		<tr>
-    			<td>ターゲット名</td>
-    			<td>作った人</td>
-    			<td>達成日</td>
-    			@if(userName == lookingUser) {
-    		    	<td></td>
-    		    }
-    		</tr>
-    	</thead>
-        <tbody>
-    		@for(dayTarget <- dayTargets) {
-    			@if(dayTarget.usrname == userName) {
-    				@if(dayTarget.cleared) {
-		   				<tr>
-	    	            	<td>@dayTarget.name</td>
-	    	            	<td>@dayTarget.maker</td>
-	    	            	<td>@dayTarget.date</td>
-		    				@if(userName == lookingUser) {
-	    						<td><a href="@routes.Application.deleteDayTarget(dayTarget.id, userName)" class="btn btn-xs btn-danger">削除</a></td>
-	    					}
-	    				</tr>
-    				}
-   				}
-   			}
-        </tbody>
-    </table>
-	</div>
-
 }

@@ -23,6 +23,7 @@
 		      <ul class="nav navbar-nav navbar-left">
 		        <li><a href="@routes.Application.home()">Home</a></li>
 		        <li><a href="@routes.Application.mymypage()">マイページ</a></li>
+		        <li><a href="@routes.Application.mymyrecord()">マイレコード</a>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="@routes.Application.logout()">ログアウト</a></li>
@@ -32,7 +33,9 @@
 		</nav>
 
 		<section id="main">
-	        @content
+			<div class=container>
+		        @content
+	        </div>
 	    </section>
 
     </body>

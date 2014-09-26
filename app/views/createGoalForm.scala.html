@@ -5,9 +5,9 @@
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main {
-
-    <h1>目標を立てる</h1>
-
+	<div class="page-header">
+	    <h1>目標を立てる</h1>
+	</div>
     @form(routes.Application.saveGoal()) {
         <fieldset>
             @inputText(goalForm("week"), '_label -> "今週の目標", '_help -> "")
