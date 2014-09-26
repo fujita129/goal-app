@@ -4,7 +4,7 @@
 
 @main {
 	<div class="page-header">
-		<h1>ようこそ @userName さん</h1>
+		<h1>ようこそ <a href="@routes.Application.mypage(userName)">@userName</a> さん</h1>
 	</div>
 
 
@@ -12,7 +12,7 @@
    	    <table class="table table-striped table-bordered">
    	    <thead>
    	    	<tr>
-   	    		<td>ユーザーID</td>
+   	    		<td>ユーザー</td>
    	    	</tr>
    	    </thead>
         <tbody>
