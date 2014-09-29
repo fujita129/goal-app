@@ -5,9 +5,6 @@
 # Home page
 GET     /                           controllers.Application.index()
 
-# GETでhttp://127.0.0.1/authにアクセスすると、controllers.Twitterクラスのauth()を呼び出す
-GET     /auth controllers.Twitter.auth()
-
 # Home
 GET     /home                       controllers.Application.home()
 
