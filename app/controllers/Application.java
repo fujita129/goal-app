@@ -14,11 +14,13 @@ public class Application extends Controller {
             routes.Application.home()
         );
 
-    public static Result index() {
+	public static Result index() {
         return redirect(routes.Application.register());
     }
 
+
     public static Result home() {
+    	Form<Word> wordForm = Form.form(Word.class);
         Form<UsrInfo> userForm = form(UsrInfo.class).bindFromRequest();
     	Finder<Long, UsrInfo> userFinder = new Finder<Long, UsrInfo>(Long.class, UsrInfo.class);
     	List<UsrInfo> allUser = userFinder.all();
@@ -26,8 +28,10 @@ public class Application extends Controller {
     	String userName = session("userName");
     	Finder<Long, DayTarget> dayFinder = new Finder<Long, DayTarget>(Long.class, DayTarget.class);
     	List<DayTarget> dayTargets = dayFinder.all();
+    	Finder<Long, Word> wordFinder = new Finder<Long, Word>(Long.class, Word.class);
+    	List<Word> words = wordFinder.all();
     	return ok(
-    		home.render(allUser, dayTargets, userName)
+    		home.render(allUser, dayTargets, userName, words, wordForm)
     	);
     }
 
@@ -233,5 +237,11 @@ public class Application extends Controller {
         return redirect(
     		routes.Application.mypage(userName)
     	);
+    }
+
+    public static Result createWord() {
+        Form<Word> wordForm = form(Word.class).bindFromRequest();
+        wordForm.get().save();
+        return GO_HOME;
     }
 }

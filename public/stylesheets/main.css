@@ -33,3 +33,16 @@ h2.point2:after {
   -ms-transform: rotate(15deg);
   transform: rotate(15deg);
 }
+
+.boad {
+    padding: 50px;
+    background: #fff;
+    border: 1px #ccc solid border-radius;
+    box-shadow: 0 2px 3px 0 #ddd;
+    -moz-box-shadow: 0 2px 3px 0 #ddd;
+    -webkit-box-shadow: 0 2px 3px 0 #ddd;
+}
+
+div.boad p {
+	color: black;
+}

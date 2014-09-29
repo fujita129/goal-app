@@ -6,13 +6,13 @@
 
 @main {
 	<div class="page-header">
-	    <h1>目標を立てる</h1>
+	    <h1>ゴールを作成</h1>
 	</div>
     @form(routes.Application.saveGoal()) {
         <fieldset>
-            @inputText(goalForm("week"), '_label -> "今週の目標", '_help -> "")
-            @inputText(goalForm("month"), '_label -> "今月の目標", '_help -> "")
-            @inputText(goalForm("year"), '_label -> "今年の目標", '_help -> "")
+            @inputText(goalForm("week"), '_label -> "今週のゴール", '_help -> "")
+            @inputText(goalForm("month"), '_label -> "今月のゴール", '_help -> "")
+            @inputText(goalForm("year"), '_label -> "今年のゴール", '_help -> "")
 			<input type="hidden" name="usrname" value=@userName />
         </fieldset>
 
